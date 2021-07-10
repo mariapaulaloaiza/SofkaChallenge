@@ -1,6 +1,6 @@
 # SofkaChallenge
 
-Este es reto técnico para training league de desarrollo de software.
+Este es el reto técnico para training league de desarrollo de software.
 
 Lo implementé en Java y la persistencia de datos la hice con MYSQL.
 
