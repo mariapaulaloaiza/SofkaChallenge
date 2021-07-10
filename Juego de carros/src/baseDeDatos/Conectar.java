@@ -32,12 +32,5 @@ public class Conectar {
 		return conn;
 	}
 	
-	public void desconectar() {
-		conn = null;
-		if(conn == null) {
-			System.out.println("conexion terminada");
-			
-		}
-	}
 	
 }
