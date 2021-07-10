@@ -68,12 +68,12 @@ import baseDeDatos.GestionBD;
 		
 	}
 	
-	public static void partida(Podio podio, Juego juego, ArrayList<Carro> carros) {
+	public static void partida(Podio podio, Juego juego, ArrayList<Carro> carros, ArrayList<Conductor> conductor) {
 		
 		
 		while(juego.isPlay()) {
 			
-				juego.jugar(podio,distancia,carros);
+				juego.jugar(podio,distancia,carros,conductor);
 						
 			}
 	}
@@ -107,15 +107,22 @@ import baseDeDatos.GestionBD;
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 		String codigoUnico = dtf.format(LocalDateTime.now());
 		
-		Juego juego = new Juego(codigoUnico,5,true);
+		Juego juego = new Juego(codigoUnico,true);
 		
 		gestor.insertarJugadoresCarrera(codigoUnico,conductores,distancia);
 		
 		Podio podio = new Podio();
 		
-		partida(podio,juego,obtenerCarros(conductores));
+		partida(podio,juego,obtenerCarros(conductores),conductores);
 		
-		podio.premiación();
+		podio.premiación(); 
+		
+
+	
+		
+		
+		
+		
 		
 		
 		
