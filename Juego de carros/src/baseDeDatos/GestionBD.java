@@ -215,7 +215,7 @@ public class GestionBD {
 		
 		while(numeroDeConductores > cont) {
 			
-			Carro carro = new Carro(cont);
+			Carro carro = new Carro(cont+1);
 			
 			Conductor conductor = new Conductor(jugadores.get(cont).getIdJugador(),jugadores.get(cont).getNombreJugador(),
 					jugadores.get(cont).getVecesGanadas(),carro);

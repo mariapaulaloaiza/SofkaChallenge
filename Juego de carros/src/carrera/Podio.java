@@ -15,12 +15,6 @@ public class Podio {
 		this.ganadores = ganadores;
 	}
 	
-	
-	
-	
-	
-
-
 
 
 	public void premiación() {

@@ -68,6 +68,29 @@ import baseDeDatos.GestionBD;
 		
 	}
 	
+	public static void partida(Podio podio, Juego juego, ArrayList<Carro> carros) {
+		
+		
+		while(juego.isPlay()) {
+			
+				juego.jugar(podio,distancia,carros);
+						
+			}
+	}
+	
+	public static ArrayList<Carro> obtenerCarros(ArrayList<Conductor> conductores){
+		
+		ArrayList<Carro> carros = new ArrayList<Carro>();
+		
+		for(Conductor conductor : conductores) {
+			
+			carros.add(conductor.getCarro());
+		} 
+		
+		return  carros;
+		
+	}
+	
 	
 	public static void main(String[] args) {
 		
@@ -81,33 +104,28 @@ import baseDeDatos.GestionBD;
 		
 		conductores = gestor.obtenerConductores(numeroDeJugadores);
 		
-		System.out.println(conductores);
-		
-		ArrayList<Carro> carros = new ArrayList<Carro>();
-		
-		for(Conductor conductor : conductores) {
-			carros.add(conductor.getCarro());
-		} 
-		
-		System.out.println(carros);
-		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 		String codigoUnico = dtf.format(LocalDateTime.now());
 		
-		
-		
 		Juego juego = new Juego(codigoUnico,5,true);
-		
-		
 		
 		gestor.insertarJugadoresCarrera(codigoUnico,conductores,distancia);
 		
-		while(juego.isPlay()) {
-			
-				juego.jugar(distancia,carros);
-				
-				
-			}
+		Podio podio = new Podio();
+		
+		partida(podio,juego,obtenerCarros(conductores));
+		
+		podio.premiación();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	

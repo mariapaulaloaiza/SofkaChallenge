@@ -10,6 +10,8 @@ public class Juego {
 	
 	private boolean play;
 	
+	public ArrayList<Carro> ganadores = new ArrayList<Carro>();
+	
 	public Juego(String idJuego, int rondas, boolean play) {
 		this.idJuego = idJuego;
 		this.rondas = rondas;
@@ -70,43 +72,54 @@ public class Juego {
 		
 	}
 	
-	public void jugar(int distancia, ArrayList<Carro> carros) {
+	public void jugar(Podio podio,int distancia, ArrayList<Carro> carros) {
 		
-		for(Carro carrito: carros) {
+		for(int i= 0; carros.size()>i; i++) {
+			
+			if(carros.size()==0) {
+				
+				setPlay(false);
+				
+				System.out.println("hola");
+				
+				break;
+				
+			}else {
 			
 			int dado = tirarDado();
 			
 			System.out.println("resultado del dado: "+ dado);
 			
-			carrito.avanzar(dado);
+			carros.get(i).avanzar(dado);
 			
-			System.out.println("carro:" + carrito.getIdCarro()+ " avance: "+ carrito.getRecorrido());
+			System.out.println("carro:" + carros.get(i).getIdCarro()+ " avance: "+ carros.get(i).getRecorrido());
 			
-			finaljuego(distancia,carros);
-		}
-		
-	}
-	
-	public void finaljuego(int distancia, ArrayList<Carro> carros) {
-		
-		Podio podio = new Podio();
-		
-		for(int i=0;i < carros.size();i++) {
-			
-			System.out.println("dentro del 2 for: "+ carros.get(i).getRecorrido());
-			
-			if(carros.get(i).getRecorrido() > distancia) {
+			if(pasoMeta(podio, distancia,carros.get(i))) {
 				
-				System.out.println("ganó: "+ carros.get(i));
+				System.out.println("pasó la meta el carro: "+carros.get(i).getIdCarro());
 				
-				setPlay(false);
+				carros.remove(i);
 				
-				break;
+			}
+			
 			}
 			
 		}
 		
+		
 	}
+	
+	public  boolean pasoMeta(Podio podio,int distancia,Carro carro) {
+		if(carro.getRecorrido()>distancia) {
+			podio.getGanadores().add(carro);
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
+	
 }
 
 
