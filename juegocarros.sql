@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-07-2021 a las 00:52:33
+-- Tiempo de generación: 10-07-2021 a las 06:40:29
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.6
 
@@ -29,12 +29,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `carreras` (
   `idCarrera` int(11) NOT NULL,
-  `idJuego` int(11) NOT NULL,
+  `idJuego` text NOT NULL,
   `conductor` int(11) NOT NULL,
   `carro` int(11) NOT NULL,
   `pista` int(11) NOT NULL,
-  `ganador` tinyint(1) NOT NULL
+  `ganador` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `carreras`
+--
+
+INSERT INTO `carreras` (`idCarrera`, `idJuego`, `conductor`, `carro`, `pista`, `ganador`) VALUES
+(4, '20210709225949', 1, 0, 1000, 1),
+(5, '20210709225949', 2, 1, 1000, 0),
+(6, '20210709225949', 3, 2, 1000, 0);
 
 -- --------------------------------------------------------
 
@@ -83,7 +92,7 @@ ALTER TABLE `jugadores`
 -- AUTO_INCREMENT de la tabla `carreras`
 --
 ALTER TABLE `carreras`
-  MODIFY `idCarrera` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCarrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `jugadores`
