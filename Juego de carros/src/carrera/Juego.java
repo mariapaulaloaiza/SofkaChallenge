@@ -4,33 +4,28 @@ import java.util.ArrayList;
 
 public class Juego {
 	
-	private int idJuego;
+	private String idJuego;
 	
-	public int rondas;
+	private int rondas;
 	
-	public boolean play;
+	private boolean play;
 	
-	private ArrayList<Conductor> ganadores = new ArrayList<Conductor>();
-	
-	
-	public Juego(int idJuego, int rondas, boolean play) {
+	public Juego(String idJuego, int rondas, boolean play) {
 		this.idJuego = idJuego;
 		this.rondas = rondas;
 		this.play = play;
 	}
 	
-	
 
-	public int getIdJuego() {
+	public String getIdJuego() {
 		return idJuego;
 	}
 
 
 
-	public void setIdJuego(int idJuego) {
+	public void setIdJuego(String idJuego) {
 		this.idJuego = idJuego;
 	}
-
 
 
 	public int getRondas() {
@@ -61,72 +56,71 @@ public class Juego {
 		
 	}
 	
-	public static void tirarDado(Conductor conductor) {
+	
+	
+	public static int tirarDado() {
 		
 		//numero aleatorio de 1 a 6 para simular el lanzamiento de un dado
 		
 		int resultadoDado = (int)(Math.random()*6+1)*100;
 		
-		int x = conductor.getRecorrido();
+		return resultadoDado;
 		
-		System.out.println("resultado dado: " + resultadoDado);
-		
-		System.out.println("recorrido antes:" + conductor.getRecorrido());
-		
-		x += resultadoDado;
-		
-		conductor.setRecorrido(x);
-		
-		System.out.println("conductor: "+ conductor.getNombreJugador() + " avance: " + conductor.getRecorrido());
 		
 		
 	}
 	
-	public void jugar(int distancia, ArrayList<Conductor> conductores) {
+	public void jugar(int distancia, ArrayList<Carro> carros) {
 		
-		for (Conductor conductor: conductores) {
-			tirarDado(conductor);
-			finaljuego(distancia,conductores);
+		for(Carro carrito: carros) {
 			
+			int dado = tirarDado();
 			
-
+			System.out.println("resultado del dado: "+ dado);
 			
-			//System.out.println("recorrido antes:" + conductor.getRecorrido());
+			carrito.avanzar(dado);
 			
+			System.out.println("carro:" + carrito.getIdCarro()+ " avance: "+ carrito.getRecorrido());
 			
+			finaljuego(distancia,carros);
+		}
+		
+	}
+	
+	public void finaljuego(int distancia, ArrayList<Carro> carros) {
+		
+		Podio podio = new Podio();
+		
+		for(int i=0;i < carros.size();i++) {
 			
+			System.out.println("dentro del 2 for: "+ carros.get(i).getRecorrido());
+			
+			if(carros.get(i).getRecorrido() > distancia) {
+				
+				System.out.println("ganó: "+ carros.get(i));
+				
+				setPlay(false);
+				
+				break;
+			}
 			
 		}
-	}
 		
-		public void finaljuego(int distancia, ArrayList<Conductor> conductores) {
-			
-			for (Conductor conductor: conductores) {
-				if(conductor.getRecorrido()> distancia) {
-					ganadores.add(conductor);
-					conductores.remove(conductor);
-					if(conductores.size() == 0) {
-						play = false;
-						break;
-						
-					}
-				}
-				
-				
-				
-				
+	}
+}
 
-				
-				//System.out.println("recorrido antes:" + conductor.getRecorrido());
-				
-				
-				
-				
-			}
+
+
+	
+	
+		
+		
+	
+	
 		
 	
 		
 		
-	}
+	
 
-}
+

@@ -26,8 +26,9 @@ public class GestionBD {
 	static ResultSet rs = null;
 	
 	
+	
 	//funcion para insertar en la tabla "carreras"
-	public static void insertar (Connection cn, Conectar con, ResultSet rs, int idJuego, int conductor, int carro, int pista) {
+	public static void insertar (String idJuego, int conductor, int carro, int pista) {
 		
 		PreparedStatement ps;
 		
@@ -37,13 +38,13 @@ public class GestionBD {
 			
 			ps = (PreparedStatement) cn.prepareStatement("INSERT INTO carreras (idJuego,conductor,carro,pista) VALUES (?,?,?,?)");
 			
-			ps.setInt(1, idJuego);
+			ps.setString(1, idJuego);
 			
 			ps.setInt(2, conductor);
 			
-			ps.setInt(2, carro);
+			ps.setInt(3, carro);
 			
-			ps.setInt(3, pista);
+			ps.setInt(4, pista);
 			
 			if(ps.executeUpdate() > 0) {
 				
@@ -54,13 +55,22 @@ public class GestionBD {
 				System.out.println("error al guardar");
 			}
 			
-			cn.close();
+			
 			
 		} catch (Exception e) {
 			
 			System.err.println(e);
 	}
 } 
+	
+	public static void insertarJugadoresCarrera(String idjuego,ArrayList<Conductor> conductores,int pista) {
+		
+		for(Conductor conductor: conductores) {
+		
+			insertar(idjuego,conductor.getIdJugador(),conductor.getCarro().getIdCarro(),pista);
+		}
+		
+	} 
 	
 	
 	
@@ -91,7 +101,7 @@ public class GestionBD {
 	
 	
 	//actualiza al ganador de la carrera
-	public static void actualizarGanador(Connection cn, Conectar con, ResultSet rs, int id) {
+	public static void actualizarGanador(String idjuego, int id) {
 		
 		PreparedStatement ps;
 		
@@ -99,8 +109,9 @@ public class GestionBD {
 			
 			cn = con.getConnection();
 			
-			ps = (PreparedStatement) cn.prepareStatement("UPDATE carreras SET ganador=1 WHERE id=? ");
+			ps = (PreparedStatement) cn.prepareStatement("UPDATE carreras SET ganador=1 WHERE idjuego = ? AND conductor=?");
 			
+			ps.setString(1, idjuego);
 			ps.setInt(2, id);
 			
 			int res = ps.executeUpdate();
@@ -230,7 +241,10 @@ public class GestionBD {
 		
 		return conductores;
 		
-	}
+	} 
+	
+	
+	
 
 
 	

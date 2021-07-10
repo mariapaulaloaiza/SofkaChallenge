@@ -2,7 +2,7 @@ package carrera;
 
 public class Pista {
 	
-	public int distancia;
+	private int distancia;
 
 	public Pista(int distancia) {
 		this.distancia = distancia;

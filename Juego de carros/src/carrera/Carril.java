@@ -2,7 +2,9 @@ package carrera;
 
 public class Carril {
 	
-	public int idCarril;
+	private int idCarril;
+
+
 
 	public int getIdCarril() {
 		return idCarril;

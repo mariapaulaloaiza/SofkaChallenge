@@ -5,15 +5,30 @@ import java.util.List;
 
 public class Podio {
 	
-	public List<Carro> primerosPuestos = new ArrayList<Carro>();
-	
-	
-	public void premiación() {
-		System.out.println("primer puesto: " + primerosPuestos.get(0).idCarro);
-		System.out.println("primer puesto: " + primerosPuestos.get(1).idCarro);
-		System.out.println("primer puesto: " + primerosPuestos.get(2).idCarro);
-		
-		
+	private ArrayList<Carro> ganadores = new ArrayList<Carro>();
+
+	public ArrayList<Carro> getGanadores() {
+		return ganadores;
 	}
+
+	public void setGanadores(ArrayList<Carro> ganadores) {
+		this.ganadores = ganadores;
+	}
+	
+	
+	
+	
+	
+
+
+
+
+	public void premiación() {
+		System.out.println("primer puesto: " + ganadores.get(0).getIdCarro());
+		System.out.println("segundo puesto: " + ganadores.get(1).getIdCarro());
+		System.out.println("tercer puesto: " + ganadores.get(2).getIdCarro());
+		
+		
+	} 
 
 }
